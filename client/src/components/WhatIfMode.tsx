@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Icon from './Icon';
 
 interface ClimateData {
@@ -53,7 +53,6 @@ const WhatIfMode: React.FC = () => {
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [currentScenario, setCurrentScenario] = useState<Scenario | null>(null);
-  const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
@@ -175,24 +174,7 @@ const WhatIfMode: React.FC = () => {
     );
   }
 
-  // Generate overlay data for charts
-  const generateOverlayData = (scenario: Scenario) => {
-    const baselineTemp = climateData.global_temp.forecast;
-    const baselineEmissions = climateData.carbon_emissions.forecast;
-    
-    // Create speculative forecasts based on scenario
-    const speculativeTemp = baselineTemp.map(point => ({
-      ...point,
-      speculative: point.value * (scenario.alt_forecasts.global_temp_2100 / baselineTemp[baselineTemp.length - 1].value)
-    }));
-    
-    const speculativeEmissions = baselineEmissions.map(point => ({
-      ...point,
-      speculative: point.value * (scenario.alt_forecasts.gdp_loss_percent / 100) // Simplified relationship
-    }));
 
-    return { speculativeTemp, speculativeEmissions };
-  };
 
   const formatNumber = (num: number) => {
     if (num >= 1e9) return `${(num / 1e9).toFixed(1)}B`;

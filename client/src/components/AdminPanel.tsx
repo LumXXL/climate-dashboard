@@ -89,7 +89,7 @@ const AdminPanel: React.FC = () => {
         type: file.name.endsWith('.csv') ? 'csv' : file.name.endsWith('.pdf') ? 'pdf' : 'api'
       }));
       
-      setDatasets(prev => [...newDatasets, ...prev]);
+      setDatasets(prev => [...newDatasets, ...prev] as Dataset[]);
       setSelectedFiles([]);
       setUploading(false);
     }, 2000);
