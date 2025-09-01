@@ -2,7 +2,7 @@
 export const config = {
   // API base URL - changes based on environment
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 
-    (import.meta.env.DEV ? 'http://localhost:3001' : 'https://your-backend-url.railway.app'),
+    (import.meta.env.DEV ? 'http://localhost:3001' : 'https://YOUR_ACTUAL_RENDER_URL.onrender.com'),
   
   // App settings
   appName: 'Climate Dashboard',
